@@ -1,11 +1,15 @@
-sudo: false
+sudo: required
+services:
+  - docker
 language: python
 python:
   - 3.6
+before_install:
+  - docker build -t yasen-baka .
 install:
   - pip install -Ur requirements.txt
 script:
   - flake8
-  - pytest -v --capture=sys
+  - pytest -v
 after_script:
   - bash -c "$(curl -fsSL https://raw.githubusercontent.com/MaT1g3R/travis_discord/master/travis.sh)"
